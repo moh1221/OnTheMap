@@ -1,2 +1,2 @@
 # OnTheMap
-Udacity's Intro to iOS App Development with Swift
+Udacity's iOS Networking with Swift
