@@ -13,7 +13,6 @@ class ParseClient: NSObject {
     
     /* Shared session */
     var session: NSURLSession
-    var studentInfo: [StudentInfo]?
     
     // Initializers
     

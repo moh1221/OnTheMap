@@ -24,7 +24,7 @@ extension ParseClient{
                 //Convert json
                 if let results = JSONResult.valueForKey(ParseClient.JSONResponseKeys.Results) as? [[String : AnyObject]] {
                     let studentInfo = StudentInfo.studentLocationsFromResults(results)
-                    self.studentInfo = studentInfo
+                    studentLoc.locArray = studentInfo
                     completionHandler(success: true, studentInfo: studentInfo, errorString: nil)
                 } else {
                     let userInfo = [NSLocalizedDescriptionKey : "Could not retrieve results"]

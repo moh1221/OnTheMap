@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E92206031C1C247A0095E245 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92206021C1C247A0095E245 /* MapViewController.swift */; };
+		E926ECC81C37CD9000B2CF80 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E926ECC71C37CD9000B2CF80 /* StudentLocation.swift */; };
 		E93E67031C1D518300B8F4C1 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93E67021C1D518300B8F4C1 /* ListViewController.swift */; };
 		E93E67051C1D640000B8F4C1 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93E67041C1D640000B8F4C1 /* InformationPostingViewController.swift */; };
 		E970C8801C3599510027B62E /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970C87F1C3599510027B62E /* Indicator.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		E92206021C1C247A0095E245 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E926ECC71C37CD9000B2CF80 /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 		E93E67021C1D518300B8F4C1 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		E93E67041C1D640000B8F4C1 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		E970C87F1C3599510027B62E /* Indicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
@@ -105,10 +107,20 @@
 		E92206011C1B49710095E245 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				E926ECC61C37A79300B2CF80 /* Student */,
 				E97CC6AF1C1D20C300AE19FA /* Parse */,
 				E99A1FF21C1AB01E00E729CA /* Udacity */,
 			);
 			name = Clients;
+			sourceTree = "<group>";
+		};
+		E926ECC61C37A79300B2CF80 /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				E99F775E1C1FF04300D29F25 /* Student.swift */,
+				E926ECC71C37CD9000B2CF80 /* StudentLocation.swift */,
+			);
+			name = Student;
 			sourceTree = "<group>";
 		};
 		E97CC6AF1C1D20C300AE19FA /* Parse */ = {
@@ -117,7 +129,6 @@
 				E97CC6B01C1D20F700AE19FA /* ParseClient.swift */,
 				E97CC6B21C1D211200AE19FA /* ParseConstants.swift */,
 				E97CC6B41C1D213100AE19FA /* ParseConvenience.swift */,
-				E99F775E1C1FF04300D29F25 /* Student.swift */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -313,6 +324,7 @@
 				E970C8801C3599510027B62E /* Indicator.swift in Sources */,
 				E99A1FBC1C1A7AA000E729CA /* LoginViewController.swift in Sources */,
 				E92206031C1C247A0095E245 /* MapViewController.swift in Sources */,
+				E926ECC81C37CD9000B2CF80 /* StudentLocation.swift in Sources */,
 				E97CC6B11C1D20F700AE19FA /* ParseClient.swift in Sources */,
 				E99A1FF61C1AB3C800E729CA /* UdacityConstants.swift in Sources */,
 				E99A1FBA1C1A7AA000E729CA /* AppDelegate.swift in Sources */,

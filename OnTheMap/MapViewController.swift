@@ -18,7 +18,6 @@ class MapViewController: UIViewController {
     var logoutBtn = UIBarButtonItem()
     var pinBtn = UIBarButtonItem()
     var reloadBtn = UIBarButtonItem()
-    var location = [StudentInfo]()
     var shared = sharedView.sharedInstance()
     
     override func viewDidLoad() {
@@ -44,9 +43,9 @@ class MapViewController: UIViewController {
         let annotationsToRemove = mapView.annotations.filter { $0 !== mapView.userLocation }
         mapView.removeAnnotations( annotationsToRemove )
         
-        if let locations = ParseClient.sharedInstance().studentInfo {
+        if studentLoc.locArray.count > 0 {
             
-            self.addPinToMap(locations)
+            self.addPinToMap(studentLoc.locArray)
             
         } else {
             
@@ -121,7 +120,7 @@ class MapViewController: UIViewController {
     func reloadBtnTouchUp(){
         dispatch_async(dispatch_get_main_queue(), {
             // remove the current list
-            ParseClient.sharedInstance().studentInfo = nil
+            studentLoc.locArray = []
             
             // Reload new list
             self.loadStudentLocations()
@@ -183,7 +182,14 @@ extension MapViewController: MKMapViewDelegate {
         if control == annotationView.rightCalloutAccessoryView {
             
             let app = UIApplication.sharedApplication()
-            app.openURL(NSURL(string: annotationView.annotation!.subtitle!!)!)
+            
+            if let mUrl = NSURL(string: annotationView.annotation!.subtitle!!) {
+                if app.canOpenURL(mUrl) {
+                    app.openURL(mUrl)
+                } else {
+                    self.shared.AlertMessage("Invalid Link", viewControl: self)
+                }
+            }
             
         }
     }

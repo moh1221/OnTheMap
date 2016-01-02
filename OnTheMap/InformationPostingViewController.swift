@@ -98,7 +98,7 @@ class InformationPostingViewController: UIViewController {
                 (success, errorString) in
                 
                 if success {
-                    ParseClient.sharedInstance().studentInfo = nil
+                    studentLoc.locArray = []
                     self.dismissViewControllerAnimated(true, completion: nil)
                 } else {
                     
@@ -134,10 +134,15 @@ extension InformationPostingViewController: MKMapViewDelegate {
         address = locationTextView.text
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
             
-            if let placemark = placemarks![0] as CLPlacemark?{
+            if error != nil {
+                self.shared.AlertMessage("Unable to find Address", viewControl: self)
+                // Stop Indicator
+                self.actIndicator.showIndicator(false)
+            } else {
+                let placemark = placemarks![0] as CLPlacemark?
                 
-                self.lat = CLLocationDegrees(placemark.location!.coordinate.latitude)
-                self.long = CLLocationDegrees(placemark.location!.coordinate.longitude)
+                self.lat = CLLocationDegrees(placemark!.location!.coordinate.latitude)
+                self.long = CLLocationDegrees(placemark!.location!.coordinate.longitude)
                 
                 let coordinate = CLLocationCoordinate2D(latitude: self.lat, longitude: self.long)
                 let annotation = MKPointAnnotation()
@@ -169,10 +174,6 @@ extension InformationPostingViewController: MKMapViewDelegate {
                 // Stop Indicator
                 self.actIndicator.showIndicator(false)
                 
-            } else {
-                self.shared.AlertMessage("Unable to find Address", viewControl: self)
-                // Stop Indicator
-                self.actIndicator.showIndicator(false)
             }
             
         })

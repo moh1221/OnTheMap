@@ -15,7 +15,7 @@ class ListViewController: UIViewController {
     @IBOutlet weak var indicatorView: UIView!
     @IBOutlet weak var listIndicator: UIActivityIndicatorView!
     
-    var locations = [StudentInfo]()
+//    var locations = [StudentInfo]()
     var logoutBtn = UIBarButtonItem()
     var pinBtn = UIBarButtonItem()
     var reloadBtn = UIBarButtonItem()
@@ -42,9 +42,8 @@ class ListViewController: UIViewController {
     func loadStudentList() {
         
         // Get data from parse
-        if let locations = ParseClient.sharedInstance().studentInfo {
+        if studentLoc.locArray.count > 0 {
             
-            self.locations = locations
             dispatch_async(dispatch_get_main_queue()) {
                 self.studentTableView.reloadData()
             }
@@ -56,8 +55,7 @@ class ListViewController: UIViewController {
             
             ParseClient.sharedInstance().getStudentInfo() { (success, studentInfo, errorString) in
                 if success {
-                    if let locations = ParseClient.sharedInstance().studentInfo {
-                        self.locations = locations
+                    if (studentInfo != nil) {
                         dispatch_async(dispatch_get_main_queue()) {
                             self.studentTableView.reloadData()
                             self.indicatorView.hidden = true
@@ -86,7 +84,7 @@ class ListViewController: UIViewController {
     func reloadBtnTouchUp(){
         dispatch_async(dispatch_get_main_queue(), {
             // remove the current list
-            ParseClient.sharedInstance().studentInfo = nil
+            studentLoc.locArray = []
             
             // Reload new list
             self.loadStudentList()
@@ -132,7 +130,7 @@ extension ListViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellReuseIdentity = "studentView"
-        let location = locations[indexPath.row]
+        let location = studentLoc.locArray[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentity) as UITableViewCell!
         
         //Fill in the cell defaults
@@ -146,13 +144,19 @@ extension ListViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let app = UIApplication.sharedApplication()
-        app.openURL(NSURL(string: locations[indexPath.row].mediaURL)!)
+        if let mUrl = NSURL(string: studentLoc.locArray[indexPath.row].mediaURL) {
+            if app.canOpenURL(mUrl) {
+                app.openURL(mUrl)
+            } else {
+                self.shared.AlertMessage("Invalid Link", viewControl: self)
+            }
+        }
         
     }
     
     //Number of rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+        return studentLoc.locArray.count
     }
     
 }
